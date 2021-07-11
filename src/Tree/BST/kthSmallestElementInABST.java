@@ -2,25 +2,28 @@ package Tree.BST;
 
 import common.TreeNode;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class kthSmallestElementInABST {
     static class Solution {
-        List<Integer> list = new ArrayList<>();
+        int index = 0;
+        int k;
+        int res;
 
         public int kthSmallest(TreeNode root, int k) {
-            addList(root);
-            return list.get(k - 1);
+            this.k = k;
+            traverse(root);
+            return res;
         }
 
-        public void addList(TreeNode treeNode) {
+        public void traverse(TreeNode treeNode) {
             if (treeNode == null) {
                 return;
             }
-            addList(treeNode.left);
-            list.add(treeNode.val);
-            addList(treeNode.right);
+            traverse(treeNode.left);
+            index++;
+            if (index == k) {
+                res = treeNode.val;
+            }
+            traverse(treeNode.right);
         }
     }
 }
