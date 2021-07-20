@@ -1,0 +1,30 @@
+package Tree;
+
+import common.TreeNode;
+
+public class SubTreeOfAnotherTree {
+    static class Solution {
+        public boolean isSubtree(TreeNode root, TreeNode subRoot) {
+            if (root == null) {
+                return false;
+            }
+            if (subRoot == null) {
+                return true;
+            }
+            return isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot) || isSameTree(root, subRoot);
+        }
+
+        public boolean isSameTree(TreeNode s, TreeNode t) {
+            if (s == null && t == null) {
+                return true;
+            }
+            if (s == null || t == null) {
+                return false;
+            }
+            if (s.val != t.val) {
+                return false;
+            }
+            return isSameTree(s.left, t.left) && isSameTree(s.right, t.right);
+        }
+    }
+}
